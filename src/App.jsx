@@ -1,4 +1,5 @@
 import './App.css'
+import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <h1>Hello World</h1>
       <RegisterPage />
+      <LoginPage />
     </>
   )
 };
