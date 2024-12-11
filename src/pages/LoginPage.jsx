@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {signin} from '../services/index';           // Importing the signin function to send form data to the backend
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-    //              useState initializes the login data state with default empty values
+    // useEffect(() => {
+        const navigate = useNavigate();
+        if(localStorage.getItem('token')) {
+            alert("Already Loggedin");
+            navigate('/home');
+        }
+    // }, []);
+
+    //               useState initializes the login data state with default empty values
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
@@ -12,7 +21,10 @@ const LoginPage = () => {
         e.preventDefault();                     // Prevents the default form submission behavior (like refreshing the page)
         const res = await signin(loginData);    // Calls the `signin` function with the form data
         if(res.status === 200) {                // Checks if the response status indicates success
+            console.log(res);
+            localStorage.setItem('token', res.token);
             alert("Logged in Successfully");
+            navigate('/home');
         } else {                                // Handles any errors by logging the response and showing an alert
             console.log(res);
             alert("An Error Occured");
