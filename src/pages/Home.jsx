@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { jobList } from "../services";
+import { data } from "react-router-dom";
 
 const HomePage = () => {
     const [jobs, setJobs] = useState([]);
@@ -18,15 +19,21 @@ const HomePage = () => {
         };
         fetchJobs();
     }, []);
-    // console.log(jobs);
+    console.log(jobs);
     return (
-        <>
-                {loading ? <h1>Loading.....</h1> : 
-                <div>
-
-                </div>
+        <div>
+            <h1>Home Page</h1>
+            {loading ? <h1>Loading.....</h1> : 
+                jobs.map((jobs) => (
+                    <div key={jobs._id}>
+                        <p>{jobs.companyName}</p>
+                        <p>{jobs.aboutCompany}</p>
+                        <p>{jobs.addLogoUrl}</p>
+                        <p>{jobs.information}</p>
+                    </div>
+                ))
             }
-        </>
+        </div>
     )
 };
 
