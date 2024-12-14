@@ -17,7 +17,7 @@ function App() {
         <Route path='/home' element={<MainPage />} />
         <Route path='/home/addjob' element={<AddJobPage />} />
         <Route path='/home/editjob/:id' element={<EditJobPage />} />
-        <Route path='/home/viewdetails' element={<ViewDetailPage />} />
+        <Route path='/home/viewdetails/:id' element={<ViewDetailPage />} />
       </Routes>
     </BrowserRouter>
   )

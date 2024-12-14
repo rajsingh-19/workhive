@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jobList } from "../services";
 import { deleteJob } from "../services";
+import Navbar from "../components/Navbar";
+import JobCard from "../components/JobCard";
 
-const HomePage = () => {
+const MainPage = () => {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
@@ -22,14 +24,12 @@ const HomePage = () => {
         fetchJobs();
     }, []);
 
-    console.log(jobs);
-
     const handleEditJob = (id) => {
         navigate(`/home/editjob/${id}`);
     };
 
-    const handleViewDetails = () => {
-        navigate('/home/viewdetails')
+    const handleViewDetails = (id) => {
+        navigate(`/home/viewdetails/${id}`);
     };
 
     const handleDeleteJob = async (id) => {
@@ -49,29 +49,48 @@ const HomePage = () => {
 
     return (
         <div>
-            <h1>Home Page</h1>
-            {loading ? <h1>Loading.....</h1> : 
-                jobs.map((jobs) => (
-                    <div key={jobs._id}>
-                        <p>{jobs.companyName}</p>
-                        <p>{jobs.addLogoUrl}</p>
-                        <p>{jobs.jobPosition}</p>
-                        <p>{jobs.monthlySalary}</p>
-                        <p>{jobs.jobType}</p>
-                        <p>{jobs.jobNature}</p>
-                        <p>{jobs.location}</p>
-                        <p>{jobs.jobDescription}</p>
-                        <p>{jobs.aboutCompany}</p>
-                        <p>{jobs.skillsRequired}</p>
-                        <p>{jobs.information}</p>
-                        <button onClick={() => handleEditJob(jobs._id)}>Edit job</button>
-                        <button onClick={handleViewDetails}>View details</button>
-                        <button onClick={() => handleDeleteJob(jobs._id)}>Delete</button>
+            <Navbar />
+            <div>
+                <div>
+                    <input type="text" />
+                </div>                
+                <div>
+                    <div>
+                        <select>
+                            <option>Skills</option>
+                            <option value=""></option>
+                        </select>
+                        <button></button>
                     </div>
-                ))
-            }
+                    <div>
+                        <button>+ Add Job</button>
+                    </div>
+                </div>
+                <div>
+                    <span>clear</span>
+                </div>
+            </div>
+            <div>
+                {loading ? (<h1>Loading.....</h1>) : 
+                    (jobs.map((job) => (
+                        <JobCard
+                        key={job._id}
+                        addLogoUrl={job.addLogoUrl}
+                        jobPosition={job.jobPosition}
+                        monthlySalary={job.monthlySalary}
+                        jobType={job.jobType}
+                        jobNature={job.jobNature}
+                        jobLocation={job.jobLocation}
+                        skillsRequired={job.skillsRequired}
+                        id={job._id}
+                        handleEditJob={handleEditJob}
+                        handleViewDetails={handleViewDetails}
+                        handleDeleteJob={handleDeleteJob} />
+                    ))
+                )}
+            </div>
         </div>
     )
 };
 
-export default HomePage;
+export default MainPage;
