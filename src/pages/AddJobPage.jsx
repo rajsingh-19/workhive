@@ -62,7 +62,8 @@ const AddJobPage = () => {
     };
 
     return (
-        <div>
+        <div className="flex dir-row">
+            <div>
             <h1>Add Job Description</h1>
             {/* Form for job creation */}
             <form onSubmit={handleAddjob}>
@@ -126,8 +127,12 @@ const AddJobPage = () => {
                     <button type="submit">+ Add Job</button>
                 </div>
             </form>
+            </div>
+            <div>
+                <img src="/assets/addjob.png" alt="add job png"/>
+            </div>
         </div>
-    )
+    );
 };
 
 export default AddJobPage;
