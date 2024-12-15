@@ -24,6 +24,9 @@ const MainPage = () => {
         fetchJobs();
     }, []);
 
+    const handleAddJob = () => {
+        navigate('/home/addjob');
+    }
     const handleEditJob = (id) => {
         navigate(`/home/editjob/${id}`);
     };
@@ -63,7 +66,7 @@ const MainPage = () => {
                         <button></button>
                     </div>
                     <div>
-                        <button>+ Add Job</button>
+                        <button onClick={handleAddJob}>+ Add Job</button>
                     </div>
                 </div>
                 <div>
