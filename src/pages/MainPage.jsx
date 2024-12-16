@@ -8,21 +8,26 @@ import JobCard from "../components/JobCard";
 const MainPage = () => {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [limit, setLimit] = useState(10);
+    const [offset, setOffset] = useState(0);
+    const [count, setCount] = useState(0);
+
     const navigate = useNavigate();
 
     useEffect(()=> {
         const fetchJobs = async () => {
-            const res = await jobList();
+            const res = await jobList({limit, offset: offset * limit});
             if(res.status === 200) {
                 setLoading(false);
                 const data = await res.json();
-                setJobs(data);
+                setJobs(data.jobs);
+                setCount(data.count);
             } else {
                 console.log(res);
             }
         };
         fetchJobs();
-    }, []);
+    }, [limit, offset]);
 
     const handleAddJob = () => {
         navigate('/home/addjob');
@@ -74,7 +79,7 @@ const MainPage = () => {
                 </div>
             </div>
             <div>
-                {loading ? (<h1>Loading.....</h1>) : 
+                {loading ? (<h1>Loading.....</h1>) :
                     (jobs.map((job) => (
                         <JobCard
                         key={job._id}
@@ -89,8 +94,18 @@ const MainPage = () => {
                         handleEditJob={handleEditJob}
                         handleViewDetails={handleViewDetails}
                         handleDeleteJob={handleDeleteJob} />
-                    ))
-                )}
+                    )))
+                }
+            </div>
+            <div>
+                <select value={limit} onChange={(e) => setLimit(e.target.value)}>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                </select>
+                <button disabled={offset === 0} onClick={() => setOffset((offset) => offset - 1)}>Prev</button>
+                <button disabled={offset*limit + limit >= count} onClick={() => setOffset((offset) => offset + 1)}>Next</button>
             </div>
         </div>
     )

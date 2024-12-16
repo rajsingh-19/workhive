@@ -2,7 +2,7 @@ const URL = "http://localhost:4000/api/"
 
 //              register 
 export const register = (data) => {
-    return fetch(`${URL}user/register/`, {
+    return fetch(`${URL}user/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -14,7 +14,7 @@ export const register = (data) => {
 
 //              signin
 export const signin = (data) => {
-    return fetch(`${URL}user/singin/`, {
+    return fetch(`${URL}user/singin`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -24,8 +24,8 @@ export const signin = (data) => {
 };
 
 //              all the job
-export const jobList = (data) => {
-    return fetch(`${URL}job`, {
+export const jobList = ({limit, offset, name, }) => {
+    return fetch(`${URL}job?limit=${limit}&offset=${offset}&companyName=${name}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
