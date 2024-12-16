@@ -11,12 +11,13 @@ const MainPage = () => {
     const [limit, setLimit] = useState(10);
     const [offset, setOffset] = useState(0);
     const [count, setCount] = useState(0);
+    const [search, setSearch] = useState('');
 
     const navigate = useNavigate();
 
     useEffect(()=> {
         const fetchJobs = async () => {
-            const res = await jobList({limit, offset: offset * limit});
+            const res = await jobList({limit, offset: offset * limit, name: search});
             if(res.status === 200) {
                 setLoading(false);
                 const data = await res.json();
@@ -27,7 +28,7 @@ const MainPage = () => {
             }
         };
         fetchJobs();
-    }, [limit, offset]);
+    }, [limit, offset, search]);
 
     const handleAddJob = () => {
         navigate('/home/addjob');
@@ -60,7 +61,7 @@ const MainPage = () => {
             <Navbar />
             <div>
                 <div>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Search" />
                 </div>                
                 <div>
                     <div>
