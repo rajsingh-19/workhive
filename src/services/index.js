@@ -24,8 +24,8 @@ export const signin = (data) => {
 };
 
 //              all the job
-export const jobList = ({limit, offset, name}) => {
-    return fetch(`${URL}job?limit=${limit}&offset=${offset}&name=${name}`, {
+export const jobList = ({limit, offset, name, skillsRequired}) => {
+    return fetch(`${URL}job?limit=${limit}&offset=${offset}&name=${name}&skillsRequired=${skillsRequired}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',

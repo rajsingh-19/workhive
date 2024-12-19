@@ -26,14 +26,15 @@ const MainPage = () => {
     const [limit, setLimit] = useState(10);
     const [offset, setOffset] = useState(0);
     const [count, setCount] = useState(0);
-    const [search, setSearch] = useState('');
+    const [nameSearch, setNameSearch] = useState('');
+    const [skillsSearch, setSkillsSearch] = useState('');
 
     const navigate = useNavigate();
 
     //              Function to fetch jobs with debouncing
     const fetchJobs = useCallback(                              // Memoized Debouncing Function
-        debouncing(async ({limit, offset, search}) => {         //Defining the debounced function outside of the `useEffect` scope
-            const res = await jobList({limit, offset: offset * limit, name: search});
+        debouncing(async ({limit, offset, nameSearch, skillsSearch}) => {         //Defining the debounced function outside of the `useEffect` scope
+            const res = await jobList({limit, offset: offset * limit, name: nameSearch, skillsRequired: skillsSearch});
             if(res.status === 200) {
                 setLoading(false);
                 const data = await res.json();
@@ -47,20 +48,24 @@ const MainPage = () => {
     
     //              Effect to fetch jobs whenever limit, offset, or search changes
     useEffect(()=> {
-        fetchJobs({limit, offset, search});
-    }, [limit, offset, search]);
+        fetchJobs({limit, offset, nameSearch, skillsSearch});
+    }, [limit, offset, nameSearch, skillsSearch]);
+    
     //              Navigate to add job page
     const handleAddJob = () => {
         navigate('/home/addjob');
     };
+
     //              Navigate to edit job page for a specific job
     const handleEditJob = (id) => {
         navigate(`/home/editjob/${id}`);
     };
+
     //              Navigate to view details page for a specific job
     const handleViewDetails = (id) => {
         navigate(`/home/viewdetails/${id}`);
     };
+
     //              Handle job deletion with appropriate feedback and refreshing the list
     const handleDeleteJob = async (id) => {
         const res = await deleteJob(id)
@@ -82,22 +87,27 @@ const MainPage = () => {
             <Navbar />
             <div>
                 <div>
-                    <input type="text" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Search" />
+                    <input type="text" onChange={(e) => setNameSearch(e.target.value)} value={nameSearch} placeholder="Search" />
                 </div>                
                 <div>
                     <div>
                         <select>
                             <option>Skills</option>
-                            <option value=""></option>
+                            <option value="All">All</option>
+                            <option value="HTML">HTML</option>
+                            <option value="CSS">CSS</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="React">React</option>
+                            <option value="Node">Node</option>
                         </select>
-                        <button></button>
+                        <button>Apply Filter</button>
                     </div>
                     <div>
                         <button onClick={handleAddJob}>+ Add Job</button>
                     </div>
                 </div>
                 <div>
-                    <span>clear</span>
+                    <button>Clear</button>
                 </div>
             </div>
             <div>
