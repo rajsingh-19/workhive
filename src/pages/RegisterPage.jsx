@@ -14,6 +14,12 @@ const RegisterPage = () => {
         e.preventDefault();                         // Prevents the default form submission behavior (like refreshing the page)
         const res = await register(formData);       // Calls the `register` function with the form data
         if(res.status === 200) {                    // Checks if the response status indicates success
+            setFormData({
+                name: '',
+                email: '',
+                mobile: '',
+                password: ''  
+            });
             alert("Registered Successfully");   
         }
         else {                                      // Handles any errors by logging the response and showing an alert

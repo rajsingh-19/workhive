@@ -1,8 +1,9 @@
-const URL = "http://localhost:4000/api/"
+const apiURL = import.meta.env.VITE_API_URL;
+console.log("api", apiURL);
 
 //              register 
 export const register = (data) => {
-    return fetch(`${URL}user/register`, {
+    return fetch(`${apiURL}api/user/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -14,7 +15,7 @@ export const register = (data) => {
 
 //              signin
 export const signin = (data) => {
-    return fetch(`${URL}user/singin`, {
+    return fetch(`${apiURL}api/user/signin`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -25,7 +26,7 @@ export const signin = (data) => {
 
 //              all the job
 export const jobList = ({limit, offset, name, skillsRequired}) => {
-    return fetch(`${URL}job?limit=${limit}&offset=${offset}&name=${name}&skillsRequired=${skillsRequired}`, {
+    return fetch(`${apiURL}api/job?limit=${limit}&offset=${offset}&name=${name}&skillsRequired=${skillsRequired}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ export const jobList = ({limit, offset, name, skillsRequired}) => {
 
 //              create a job
 export const addJob = (data) => {
-    return fetch(`${URL}job`, {
+    return fetch(`${apiURL}api/job`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -47,7 +48,7 @@ export const addJob = (data) => {
 
 //              get job by id
 export const getJobById = (id) => {
-    return fetch(`${URL}job/${id}`, {
+    return fetch(`${apiURL}api/job/${id}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application.json',
@@ -58,7 +59,7 @@ export const getJobById = (id) => {
 
 //              edit a job
 export const editJob = (id, jobDetails) => {
-    return fetch(`${URL}job/${id}`, {
+    return fetch(`${apiURL}api/job/${id}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ export const editJob = (id, jobDetails) => {
 
 //              delete a job
 export const deleteJob = (id) => {
-    return fetch(`${URL}job/${id}`, {
+    return fetch(`${apiURL}api/job/${id}`, {
         method: "DELETE",
         headers: {
             'Content-Type': 'application.json',
