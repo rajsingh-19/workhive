@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import JobForm from "../components/JobForm";
+import JobForm from "../components/jobform/JobForm";
 import { editJob, getJobById } from "../services";
 
 const EditJobPage = () => {

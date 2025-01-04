@@ -1,5 +1,4 @@
 const apiURL = import.meta.env.VITE_API_URL;
-console.log("api", apiURL);
 
 //              register 
 export const register = (data) => {

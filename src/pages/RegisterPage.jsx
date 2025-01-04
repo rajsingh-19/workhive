@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {register} from '../services/index';     // Importing the register function to send form data to the backend
+import "../styles/login.css";
 
 const RegisterPage = () => {
     //              useState initializes the form data state with default empty values

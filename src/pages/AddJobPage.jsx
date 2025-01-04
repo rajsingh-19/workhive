@@ -1,5 +1,5 @@
 import { useState } from "react";
-import JobForm from "../components/JobForm";
+import JobForm from "../components/jobform/JobForm";
 import { addJob } from "../services";
 
 const AddJobPage = () => {

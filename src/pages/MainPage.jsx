@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jobList } from "../services";
 import { deleteJob } from "../services";
-import Navbar from "../components/Navbar";
-import JobCard from "../components/JobCard";
+import Navbar from "../components/navbar/Navbar";
+import JobCard from "../components/jobCard/JobCard";
 
 const debounceDelayTime = 1000;              // defining the wait time
 //                      Debounce function to delay execution of a function until a specified time has passed    
