@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { jobList } from "../services";
-import { deleteJob } from "../services";
-import Navbar from "../components/navbar/Navbar";
-import JobCard from "../components/jobCard/JobCard";
+import { jobList, deleteJob } from "../../services/index";
+import Navbar from "../../components/navbar/Navbar";
+import JobCard from "../../components/jobCard/JobCard";
 
 const debounceDelayTime = 1000;              // defining the wait time
 //                      Debounce function to delay execution of a function until a specified time has passed    
@@ -28,6 +27,7 @@ const MainPage = () => {
     const [count, setCount] = useState(0);
     const [nameSearch, setNameSearch] = useState('');
     const [skillsSearch, setSkillsSearch] = useState('');
+    const [userStatus, setUserStatus] = useState(false);
 
     const navigate = useNavigate();
 
@@ -73,7 +73,6 @@ const MainPage = () => {
             const data = await res.json()
             alert("Job Deleted Successfully");
             jobList();
-            console.log(data);
         } else if (res.status === 401) {
             alert("You are not authorized to delete this job");
         } else {
@@ -85,11 +84,15 @@ const MainPage = () => {
     return (
         <div>
             <Navbar />
-            <div>
-                <div>
+            {/*             Search container     */}
+            <div className="flex dir-col m-t-30">
+                {/*         input Container     */}
+                <div className="flex dir-row justify-center align-center">
                     <input type="text" onChange={(e) => setNameSearch(e.target.value)} value={nameSearch} placeholder="Search" />
                 </div>                
-                <div>
+                {/*         skills & add job container */}
+                <div className="flex dir-row">
+                    {/*         right section     */}
                     <div>
                         <select>
                             <option>Skills</option>
@@ -100,17 +103,24 @@ const MainPage = () => {
                             <option value="React">React</option>
                             <option value="Node">Node</option>
                         </select>
-                        <button>Apply Filter</button>
                     </div>
                     <div>
-                        <button onClick={handleAddJob}>+ Add Job</button>
+                        choosed options
+                    </div>
+                    {/*         left section     */}
+                    <div>
+                        {userStatus ? 
+                            (<button onClick={handleAddJob}>+ Add Job</button>) : 
+                            (<>
+                                <button>Apply Filter</button>
+                                <button>Clear</button>
+                            </>)
+                        }
                     </div>
                 </div>
-                <div>
-                    <button>Clear</button>
-                </div>
             </div>
-            <div>
+            {/*         Job Card Container       */}
+            <div className="flex dir-col align-center">
                 {loading ? (<h1>Loading.....</h1>) :
                     (jobs.map((job) => (
                         <JobCard
@@ -120,7 +130,7 @@ const MainPage = () => {
                         monthlySalary={job.monthlySalary}
                         jobType={job.jobType}
                         jobNature={job.jobNature}
-                        jobLocation={job.jobLocation}
+                        jobLocation={job.location}
                         skillsRequired={job.skillsRequired}
                         id={job._id}
                         handleEditJob={handleEditJob}
@@ -129,6 +139,7 @@ const MainPage = () => {
                     )))
                 }
             </div>
+            {/*         Pagination and offset Container          */}
             <div>
                 <select value={limit} onChange={(e) => setLimit(e.target.value)}>
                     <option value="10">10</option>

@@ -5,9 +5,7 @@
   -moz-osx-font-smoothing: grayscale;
   padding: 0;
   margin: 0;
-}
-body {
-  overflow: hidden;
+  box-sizing: border-box;
 }
 /*      font style     */
 .dm-sans {
@@ -32,6 +30,9 @@ body {
 .align-center {
   align-items: center;
 }
+.bg-transparent {
+  background: transparent;
+}
 /*        font wt    */
 .font-wt-700 {
   font-weight: 700;
@@ -52,7 +53,7 @@ body {
 .position-sticky {
   position: sticky;
 }
-
+/*      button and input   */
 .outline-none {
   outline: none;
 }
@@ -80,8 +81,14 @@ body {
 .text-19 {
   font-size: 19px;
 }
+.text-20 {
+  font-size: 20px;
+}
 .text-22 {
   font-size: 22px;
+}
+.text-24 {
+  font-size: 24px;
 }
 .text-30 {
   font-size: 30px;
@@ -99,6 +106,12 @@ body {
 .m-t-15 {
   margin-top: 15px;
 }
+.m-r-5 {
+  margin-right: 5px;
+}
+.m-r-20 {
+  margin-right: 20px;
+}
 /*      custom element    */
 .btn {
   background-color: #ED5353;
@@ -107,4 +120,17 @@ body {
   color: #FFFFFF;
   height: 40px;
   width: 140px;
+}
+
+/* For modern browsers */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+    -moz-appearance: textfield; /* Removes the spinner in Firefox */
+    appearance: textfield;      /* Standard property */
 }

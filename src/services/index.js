@@ -31,7 +31,7 @@ export const jobList = ({limit, offset, name, skillsRequired}) => {
             'Content-Type': 'application/json',
         }
     })
-} 
+};
 
 //              create a job
 export const addJob = (data) => {
@@ -43,7 +43,7 @@ export const addJob = (data) => {
         },
         body: JSON.stringify(data)
     })
-}
+};
 
 //              get job by id
 export const getJobById = (id) => {
@@ -54,7 +54,7 @@ export const getJobById = (id) => {
             'authorization': `${localStorage.getItem('token')}`
         }
     })
-}
+};
 
 //              edit a job
 export const editJob = (id, jobDetails) => {
@@ -66,7 +66,7 @@ export const editJob = (id, jobDetails) => {
         },
         body: JSON.stringify(jobDetails)
     })
-}
+};
 
 //              delete a job
 export const deleteJob = (id) => {
@@ -77,4 +77,4 @@ export const deleteJob = (id) => {
             'authorization': `${localStorage.getItem('token')}`
         }
     })
-}
+};

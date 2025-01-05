@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import JobForm from "../components/jobform/JobForm";
-import { editJob, getJobById } from "../services";
+import JobForm from "../../components/jobform/JobForm";
+import { editJob, getJobById } from "../../services/index";
 
 const EditJobPage = () => {
     const {id} = useParams();           // get the id from the header parameter

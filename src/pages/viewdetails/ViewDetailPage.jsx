@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { getJobById } from "../services";
+import { useNavigate, useParams } from "react-router-dom";
+import { getJobById } from "../../services/index";
 
 const ViewDetailPage = () => {
     const {id} = useParams();                       // Extract the `id` parameter from the route using `useParams` hook

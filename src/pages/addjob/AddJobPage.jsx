@@ -1,6 +1,6 @@
-import { useState } from "react";
-import JobForm from "../components/jobform/JobForm";
-import { addJob } from "../services";
+import React, { useState } from "react";
+import JobForm from "../../components/jobform/JobForm";
+import { addJob } from "../../services/index";
 
 const AddJobPage = () => {
 //              state to manage form data for adding a job

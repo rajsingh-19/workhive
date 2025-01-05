@@ -1,0 +1,43 @@
+.navbarContainer{
+    width: 100%;
+    height: 10vh;
+    background-image: url("../../assets/navbg.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-bottom-right-radius: 60px;
+    border-bottom-left-radius: 60px;
+}
+.leftShape {
+    bottom: 0px;
+    left: 0px;
+}
+.middleShape {
+    top: -30px;
+    justify-content: center;
+}
+.rightShape {
+    bottom: 0px;
+    right: 65px;
+}
+.navContent {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 80px;
+    top: 35%;
+    justify-content: space-between;
+}
+.loginBtn {
+    background: #FF6B6B;
+    border: 2px solid #FFFFFF;
+    width: 100px;
+    height: 35px;
+    border-radius: 7px;
+}
+.registerBtn {
+    color: #ED5353;
+    background: #FFFFFF;
+    width: 100px;
+    height: 35px;
+    border-radius: 7px;
+}

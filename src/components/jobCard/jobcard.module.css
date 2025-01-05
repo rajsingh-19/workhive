@@ -1,0 +1,9 @@
+.jobCard {
+    width: 1000px;
+    height: 140px;
+    box-shadow: 0px 0px 22px 2px #FF202040;
+    background-color: #FFFFFF;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 20px;
+}
