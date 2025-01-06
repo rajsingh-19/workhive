@@ -2,13 +2,12 @@
 .detailsPageContainer {
     height: auto;
     min-height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-color: #FFEFEF;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden;
 }
 .detailsContainer {
     height: 100%;
