@@ -8,18 +8,82 @@
     padding: 20px;
 }
 .companyLogoContainer {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 15px;
 }
 .companyLogo {
     width: 100%;
     height: 100%;
 }
+.secondSection {
+    width: 150px;
+    margin-left: 5px;
+    margin-right: 20px;
+}
+.thirdSection {
+    width: 180px;
+}
+.rupeeIcon {
+    width: 25px;
+    height: 25px;
+}
+.jobNature, .jobType {
+    color: #ED5353;
+}
+.verticalLine {
+    color: #ED5353;
+    margin-left: 5px;
+    margin-right: 5px;
+}
 .countryFlagContainer {
     width: 50px;
     height: 40px;
+    margin-right: 5px;
 }
 .countryFlag {
     width: 100%;
     height: 100%;
+}
+.location, .monthlySalary {
+    color: #9C9C9C;
+}
+/*              right section        */
+.skillsContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 10px;
+}
+.btnsContainer {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.skillsBtn {
+    width: 80px;
+    height: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: none;
+    font-family: "DM Sans";
+    font-weight: 500;
+    background-color: #FFEEEE;
+}
+.detailsBtn {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    background-color: #ED5353;
+}
+.editDelBtn {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    color: #ED5353;
+    background-color: #FFFFFF;
+    border: 2px solid #ED5353;
+    margin-left: 5px;
+    margin-right: 5px;
 }

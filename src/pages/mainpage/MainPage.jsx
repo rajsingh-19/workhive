@@ -36,7 +36,7 @@ const MainPage = () => {
     const navigate = useNavigate();
 
     // Check if the user is logged in
-      useEffect(() => {
+    useEffect(() => {
         const isUserLoggedIn = localStorage.getItem('token');
         if (isUserLoggedIn) {
           setUserStatus(true);
@@ -109,11 +109,11 @@ const MainPage = () => {
         <div className="flex dir-col align-center">
             <Navbar />
             {/*             Search container     */}
-            <div className={`${styles.searchContainer} flex dir-col align-center m-t-30`}>
+            <div className={`${styles.searchContainer} flex dir-col align-center m-t-30 m-b-25`}>
                 {/*         input Container     */}
                 <div className={`${styles.searchBoxContainer} flex dir-row align-center`}>
                     <img src={searchIcon} alt="search icon" />
-                    <input className={`${styles.searchInput} text-20 font-wt-500 dm-sans border-none outline-none`} type="text" onChange={(e) => setNameSearch(e.target.value)} value={nameSearch} placeholder="Type any job title" />
+                    <input className={`${styles.searchInput} text-20 font-wt-500 dm-sans border-none outline-none`} type="text" onChange={(e) => setNameSearch(e.target.value)} value={nameSearch} placeholder="Type any company name" />
                 </div>                
                 {/*         skills & add job container */}
                 <div className={`${styles.filterSkillsSection} flex dir-row`}>
