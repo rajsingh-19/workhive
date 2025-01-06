@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from "./navbar.module.css";
+import { toast } from 'react-toastify';
 import leftShape from "../../assets/leftShape.svg";
 import rightShape from "../../assets/rightShape.svg";
 import middleShape from "../../assets/middleShape.svg";
@@ -8,7 +9,7 @@ import middleShape from "../../assets/middleShape.svg";
 const Navbar = () => {
   const navigate = useNavigate();
   const [userStatus, setUserStatus] = useState(false);
-
+  
   // Check if the user is logged in
   useEffect(() => {
     const isUserLoggedIn = localStorage.getItem('token');
@@ -20,6 +21,8 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setUserStatus(false);
+    toast.success("Log out Successfully");
+    window.location.reload();
     navigate('/');
   }
 

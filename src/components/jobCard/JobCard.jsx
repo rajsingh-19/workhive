@@ -14,7 +14,6 @@ const JobCard = ({addLogoUrl, jobPosition, monthlySalary, jobType, jobNature, jo
         }
     }, []);
           
-
     return (
         <div className={`${styles.jobCard} flex dir-row justify-space-btwn`}>
             <div className="flex dir-row">

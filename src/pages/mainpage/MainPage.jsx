@@ -46,7 +46,7 @@ const MainPage = () => {
           setUserStatus(true);
         }
     }, []);
-      
+
     //              Function to fetch jobs with debouncing
     const fetchJobs = useCallback(                              // Memoized Debouncing Function
         debouncing(async ({limit, offset, nameSearch, skillsSearch}) => {         //Defining the debounced function outside of the `useEffect` scope

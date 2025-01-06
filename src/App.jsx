@@ -10,6 +10,7 @@ import ViewDetailPage from "./pages/viewdetails/ViewDetailPage";
 import NotFound from "./pages/notfound/Notfound";
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
