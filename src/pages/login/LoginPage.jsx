@@ -5,6 +5,7 @@ import styles from "./login.module.css";
 import loginImage from "../../assets/login.png";
 import lock from "../../assets/lock.svg";
 import view from "../../assets/view.svg";
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -66,16 +67,16 @@ const LoginPage = () => {
                     password: '',
                 });
 
-                alert("Logged in Successfully");
+                toast.success("Logged in Successfully");
                 navigate('/');
             } else {                                // Handles any errors by logging the response and showing an alert
                 const errorData = await res.json();
                 const errorMessage = errorData.message || "An error occurred";
-                alert(errorMessage);  // Show the error message from the backend
+                toast.error(errorMessage);  // Show the error message from the backend
             }
         } catch (error) {
             console.log(error);
-            alert("An unexpected error occurred:", error);
+            toast.error("An unexpected error occurred:", error);
         };
     };
 

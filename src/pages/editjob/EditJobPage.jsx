@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styles from "../addjob/addjob.module.css";
 import { editJob, getJobById } from "../../services/index";
 import addJobPng from "../../assets/addjob.png";
-
+import { toast } from 'react-toastify';
 
 const EditJobPage = () => {
     const {id} = useParams();           // get the id from the header parameter
@@ -33,11 +33,11 @@ const EditJobPage = () => {
                     } else {
                         const errorData = await res.json();
                         const errorMessage = errorData.message || "An error occurred";
-                        alert(errorMessage);  // Show the error message from the backend
+                        toast.error(errorMessage);  // Show the error message from the backend
                     }
                 } catch (error) {
                     console.log(error);
-                    alert("An unexpected error occurred:", error);
+                    toast.error("An unexpected error occurred:", error);
                 }
             }
             fetchJobById();
@@ -64,15 +64,15 @@ const EditJobPage = () => {
                     skillsRequired: '',
                     information: ''
                 });
-                alert("Job Updated successfully");
+                toast.success("Job Updated successfully");
             } else {
                 const errorData = await res.json();
                 const errorMessage = errorData.message || "An error occurred";
-                alert(errorMessage);  // Show the error message from the backend
+                toast.error(errorMessage);  // Show the error message from the backend
             }
         } catch (error) {
             console.log(error);
-            alert("An unexpected error occurred:", error);
+            toast.error("An unexpected error occurred:", error);
         }
     };
 

@@ -35,7 +35,11 @@ const ViewDetailPage = () => {
     
     // Handle the case where no job is found or `job` is null
     if (!job) {
-        return <h1>No Job Found</h1>;
+        return (
+            <div className="flex dir-row justify-center align-center">
+                <h1>Loading....</h1>
+            </div>
+        );
     }
 
     // Destructure the job properties for easier access

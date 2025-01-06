@@ -6,7 +6,7 @@ import styles from "./mainpage.module.css";
 import { jobList, deleteJob } from "../../services/index";
 import searchIcon from "../../assets/searchIcon.svg";
 import downArrow from "../../assets/downArrow.svg";
-
+import { toast } from 'react-toastify';
 
 //          --Debouncing Implementation--
 const debounceDelayTime = 1000;              // defining the wait time
@@ -86,14 +86,14 @@ const MainPage = () => {
     const handleDeleteJob = async (id) => {
         try {
             const res = await deleteJob(id);
-            console.log(res.status);
             if(res.status === 200) {
-                alert("Job Deleted Successfully");
+                // alert("Job Deleted Successfully");
+                toast.info("Job Deleted Successfully");
                 jobList({limit, offset, nameSearch, skillsSearch});                  // Refresh the job list
             } else {
                 const errorData = await res.json();
                 const errorMessage = errorData.message || "An error occurred";
-                alert(errorMessage);  // Show the error message from the backend
+                toast.error(errorMessage);
             }   
         } catch (error) {
             console.log(error);

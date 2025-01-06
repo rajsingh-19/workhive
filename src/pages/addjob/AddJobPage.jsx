@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { addJob } from "../../services/index";
 import addJobPng from "../../assets/addJob.png";
 import styles from './addjob.module.css';
-
+import { toast } from 'react-toastify';
 
 const AddJobPage = () => {
 //              state to manage form data for adding a job
@@ -39,12 +39,12 @@ const AddJobPage = () => {
                 skillsRequired: '',
                 information: ''
             });                                 // Reset form fields after successful submission
-            alert("Job created successfully");      // Notify user
+            toast.success("Job created successfully");      // Notify user
         } else if (res.status === 401) {            // If the user is not authenticated
-            alert("Login to create a job");
+            toast.info("Login to create a job");
         } else {                                    // Handle other errors
             console.log(res);                       // Log the error response
-            alert("error");
+            toast.error("error");
         }
     };
 //              function for reset the job form
