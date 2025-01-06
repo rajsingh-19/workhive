@@ -22,6 +22,7 @@ const EditJobPage = () => {
         information: ''
     });
 
+    //    UseEffect for fetching the job byt its id 
     useEffect(() => {
         if(id) {
             const fetchJobById = async () => {
