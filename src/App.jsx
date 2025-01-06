@@ -7,6 +7,7 @@ import RegisterPage from "./pages/register/RegisterPage";
 import AddJobPage from "./pages/addjob/AddJobPage";
 import EditJobPage from "./pages/editjob/EditJobPage";
 import ViewDetailPage from "./pages/viewdetails/ViewDetailPage";
+import NotFound from "./pages/notfound/Notfound";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Route path='/home/addjob' element={<ProtectedRoute><AddJobPage /></ProtectedRoute>} />
         <Route path='/home/editjob/:id' element={<ProtectedRoute><EditJobPage /></ProtectedRoute>} />
         <Route path='/home/viewdetails/:id' element={<ViewDetailPage />} />
+        {/* Catch all route for undefined paths */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )

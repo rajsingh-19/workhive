@@ -1,0 +1,153 @@
+.searchContainer {
+    position: relative;
+    width: 1000px;
+    height: 250px;
+    box-shadow: 0px 0px 22px 4px #FF202040;
+    background-color: #FFFFFF;
+}
+.searchBoxContainer {
+    width: 90%;
+    height: 50px;
+    border: 1.8px solid #E3E3E3;
+    border-radius: 9px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.searchBoxContainer > img {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.searchInput {
+    width: 860px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #9C9C9C;
+}
+.searchInput::placeholder {
+    color: #9C9C9C;
+}
+.filterSkillsSection {
+    width: 90%;
+    justify-content: space-between;
+}
+.skkilsBtnContainer {
+    width: 40px;
+}
+.allSkillsContainer {
+    position: absolute;
+    width: 140px;
+    border-radius: 9px;
+    background-color: #FFFFFF;
+    border: 2px solid #CECECE;
+}
+.allSkillsContainer button {
+    height: 40px;
+    color: #9C9C9C;
+    border-bottom: 1px solid #CECECE;
+}
+.firstBtn {
+    height: 40px;
+    width: 140px;
+    justify-content: space-around;
+}
+.firstBtn > img {
+    color: #9C9C9C;
+}
+.skillsBox {
+    width: 140px;
+    height: 40px;
+    border-radius: 9px;
+    color: #9C9C9C;
+    background-color: #FFFFFF;
+    border: 2px solid #CECECE;
+    justify-content: space-around;
+}
+.skillsBox img {
+    color: #9C9C9C;
+}
+.choosedSkillsContainer {
+    width: 400px;
+}
+.choosedSkillsContainer ul {
+    width: 100%;
+}
+.addJob {
+    width: 150px;
+    height: 40px;
+    color: #FFFFFF;
+    background-color: #ED5353;
+    border-radius: 9px;
+}
+.choosedSkill {
+    width: 150px;
+    height: 40px;
+    background-color: #FFEEEE;
+    border-radius: 2px;
+    justify-content: space-between;
+    padding-left: 10px;
+}
+.crossBtn {
+    height: 100%;
+    width: 40px;
+    background-color: #FF6B6B;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+.applyFilter {
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #ED5353;
+}
+.clear {
+    color: #ED5353;
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+/*      pagination       */
+.paginationContainer {
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+.paginationContainer select {
+    height: 40px;
+    width: 60px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #9C9C9C;
+    border: 1.8px solid #E3E3E3;
+    border-radius: 9px;
+    outline: none;
+    cursor: pointer;
+}
+.prevBtn {
+    width: 100px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    color: #9C9C9C;
+    border: 1.8px solid #E3E3E3;
+    background-color: #FFEEEE;
+    cursor: pointer;
+    outline: none;
+}
+.nextBtn {
+    width: 100px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    color: #9C9C9C;
+    border: 1.8px solid #E3E3E3;
+    background-color: #FFEEEE;
+    cursor: pointer;
+    outline: none;
+}

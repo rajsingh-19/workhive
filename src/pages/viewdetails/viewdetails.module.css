@@ -1,0 +1,74 @@
+/*      view details container   */
+.detailsPageContainer {
+    height: auto;
+    min-height: 100vh;
+    width: 100vw;
+    background-color: #FFEFEF;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.detailsContainer {
+    height: 100%;
+}
+.jobHeading {
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 850px;
+    height: 100px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 23px 2px #0000001A;
+    font-family: "DM Sans";
+    font-weight: 500;
+    color: #000000;
+    font-size: 24px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.jobDetails {
+    width: 900px;
+    margin-top: 125px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 2px 35px 1px #0000001A;    
+    padding: 40px;
+}
+
+.jobNature, .companyName, .stipend, .workMode {
+    color: #999999;
+}
+.location {
+    color: #ED5353;
+}
+.monthlySalary, .jobType, .jobDesc, .aboutCompany, .info {
+    color: #595959;
+}
+.skillsBtns {
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: #595959;
+    background-color: #FFEEEE;
+}
+.img {
+    width: 40px;
+    height: 40px;
+}
+.imgIcons {
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+}
+
+.editBtn {
+    width: 140px;
+    height: 35px;
+    color: #FFFFFF;
+    border-radius: 5px;
+    background-color: #ED5353;
+    margin-left: 10px;
+}

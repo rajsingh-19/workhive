@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { jobList, deleteJob } from "../../services/index";
 import Navbar from "../../components/navbar/Navbar";
 import JobCard from "../../components/jobCard/JobCard";
+import styles from "./mainpage.module.css";
+import { jobList, deleteJob } from "../../services/index";
+import searchIcon from "../../assets/searchIcon.svg";
+import downArrow from "../../assets/downArrow.svg";
 
 const debounceDelayTime = 1000;              // defining the wait time
 //                      Debounce function to delay execution of a function until a specified time has passed    
@@ -28,9 +31,18 @@ const MainPage = () => {
     const [nameSearch, setNameSearch] = useState('');
     const [skillsSearch, setSkillsSearch] = useState('');
     const [userStatus, setUserStatus] = useState(false);
+    const [skillsOpen, setSkillsOpen] = useState(false);
 
     const navigate = useNavigate();
 
+    // Check if the user is logged in
+      useEffect(() => {
+        const isUserLoggedIn = localStorage.getItem('token');
+        if (isUserLoggedIn) {
+          setUserStatus(true);
+        }
+    }, []);
+      
     //              Function to fetch jobs with debouncing
     const fetchJobs = useCallback(                              // Memoized Debouncing Function
         debouncing(async ({limit, offset, nameSearch, skillsSearch}) => {         //Defining the debounced function outside of the `useEffect` scope
@@ -68,52 +80,81 @@ const MainPage = () => {
 
     //              Handle job deletion with appropriate feedback and refreshing the list
     const handleDeleteJob = async (id) => {
-        const res = await deleteJob(id)
-        if(res.status === 200) {
-            const data = await res.json()
-            alert("Job Deleted Successfully");
-            jobList();
-        } else if (res.status === 401) {
-            alert("You are not authorized to delete this job");
-        } else {
-            console.log(res);
-            alert('error');
+        try {
+            const res = await deleteJob(id);
+            console.log(res.status);
+            if(res.status === 200) {
+                alert("Job Deleted Successfully");
+                jobList({limit, offset, nameSearch, skillsSearch});                  // Refresh the job list
+            } else {
+                const errorData = await res.json();
+                const errorMessage = errorData.message || "An error occurred";
+                alert(errorMessage);  // Show the error message from the backend
+            }   
+        } catch (error) {
+            console.log(error);
+            alert("An unexpected error occurred:", error);
         }
     };
 
+    const handleskillsOptions = () => {
+        setSkillsOpen((prev) => !prev);
+    };
+
+    const handleCrossBtn = () => {
+        console.log("k");
+    }
+
     return (
-        <div>
+        <div className="flex dir-col align-center">
             <Navbar />
             {/*             Search container     */}
-            <div className="flex dir-col m-t-30">
+            <div className={`${styles.searchContainer} flex dir-col align-center m-t-30`}>
                 {/*         input Container     */}
-                <div className="flex dir-row justify-center align-center">
-                    <input type="text" onChange={(e) => setNameSearch(e.target.value)} value={nameSearch} placeholder="Search" />
+                <div className={`${styles.searchBoxContainer} flex dir-row align-center`}>
+                    <img src={searchIcon} alt="search icon" />
+                    <input className={`${styles.searchInput} text-20 font-wt-500 dm-sans border-none outline-none`} type="text" onChange={(e) => setNameSearch(e.target.value)} value={nameSearch} placeholder="Type any job title" />
                 </div>                
                 {/*         skills & add job container */}
-                <div className="flex dir-row">
+                <div className={`${styles.filterSkillsSection} flex dir-row`}>
                     {/*         right section     */}
-                    <div>
-                        <select>
-                            <option>Skills</option>
-                            <option value="All">All</option>
-                            <option value="HTML">HTML</option>
-                            <option value="CSS">CSS</option>
-                            <option value="JavaScript">JavaScript</option>
-                            <option value="React">React</option>
-                            <option value="Node">Node</option>
-                        </select>
+                    <div className={`${styles.skillsBtnCotainer} flex dir-col`}>
+                        {
+                            skillsOpen ? (
+                                <div className={`${styles.allSkillsContainer} flex dir-col`}>
+                                    <button onClick={handleskillsOptions} className={`${styles.firstBtn} flex align-center cursor-pointer border-none outline-none bg-transparent`}>
+                                        <span className="roboto font-wt-500">Skills</span>
+                                        <img src={downArrow} alt="downArrow Icon" />
+                                    </button>
+                                    <button className="roboto font-wt-500 cursor-pointer border-none outline-none bg-transparent">All</button>
+                                    <button className="roboto font-wt-500 cursor-pointer border-none outline-none bg-transparent">React</button>
+                                    <button className="roboto font-wt-500 cursor-pointer border-none outline-none bg-transparent">JavaScript</button>
+                                    <button className="roboto font-wt-500 cursor-pointer border-none outline-none bg-transparent">Node</button>
+                                    <button className="roboto font-wt-500 cursor-pointer border-none outline-none bg-transparent">Express</button>
+                                </div>
+                            ) : (
+                                <button onClick={handleskillsOptions} className={`${styles.skillsBox} flex align-center position-absolute cursor-pointer border-none outline-none`}>
+                                    <span className="roboto font-wt-500">Skills</span>
+                                    <img src={downArrow} alt="downArrow Icon" />
+                                </button>
+                            )
+                        }
                     </div>
-                    <div>
-                        choosed options
+                    <div className={styles.choosedSkillsContainer}>
+                        <ul>
+                            <li className={`${styles.choosedSkill} flex dir-row align-center`}>
+                                <p className="dm-sans font-wt-500">JavaScript</p>
+                                <button onClick={handleCrossBtn} className={`${styles.crossBtn} text-white outline-none border-none cursor-pointer`}>X</button>
+                            </li>
+                        </ul>
                     </div>
                     {/*         left section     */}
                     <div>
                         {userStatus ? 
-                            (<button onClick={handleAddJob}>+ Add Job</button>) : 
+                            (<button onClick={handleAddJob} className={`${styles.addJob} roboto font-wt-500 border-none outline-none cursor-pointer`}>+ Add Job</button>) : 
                             (<>
-                                <button>Apply Filter</button>
-                                <button>Clear</button>
+                                <button className={`${styles.applyFilter} text-white dm-sans font-wt-500 border-none outline-none cursor-pointer`}>Apply Filter</button>
+                                <button className={`${styles.clear} dm-sans font-wt-500 bg-transparent outline-none border-none cursor-pointer`}>Clear</button>
                             </>)
                         }
                     </div>
@@ -140,15 +181,15 @@ const MainPage = () => {
                 }
             </div>
             {/*         Pagination and offset Container          */}
-            <div>
+            <div className={styles.paginationContainer}>
                 <select value={limit} onChange={(e) => setLimit(e.target.value)}>
                     <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="25">25</option>
                 </select>
-                <button disabled={offset === 0} onClick={() => setOffset((offset) => offset - 1)}>Prev</button>
-                <button disabled={offset*limit + limit >= count} onClick={() => setOffset((offset) => offset + 1)}>Next</button>
+                <button className={styles.prevBtn} disabled={offset === 0} onClick={() => setOffset((offset) => offset - 1)}>Prev</button>
+                <button className={styles.nextBtn} disabled={offset*limit + limit >= count} onClick={() => setOffset((offset) => offset + 1)}>Next</button>
             </div>
         </div>
     )

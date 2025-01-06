@@ -113,7 +113,7 @@ const LoginPage = () => {
                 </div>
             </div>
             <div className={`${styles.loginImgContainer} position-relative`}>
-                <p className={`${styles.onImgLine} dm-sans font-wt-500 text-white position-absolute`}>Your Personal Job Finder</p>
+                <p className={`${styles.onImgLine} dm-sans text-30 font-wt-500 text-white position-absolute`}>Your Personal Job Finder</p>
                 <img src={loginImage} alt="login page image" className={styles.loginImg} />
             </div>
         </div>

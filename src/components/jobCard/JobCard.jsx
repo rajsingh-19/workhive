@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "./jobcard.module.css";
+import flagIcon from "../../assets/flag.svg";
 
 const JobCard = ({addLogoUrl, jobPosition, monthlySalary, jobType, jobNature, jobLocation, skillsRequired, id, handleEditJob, handleViewDetails, handleDeleteJob}) => {
     return (
         <div className={`${styles.jobCard} flex dir-row`}>
             <div className="flex dir-row">
                 {/*         img container     */}
-                <div className="flex dir-row justify-center align-center">
-                    <img src={addLogoUrl} alt="" />
+                <div className={`${styles.companyLogoContainer} flex dir-row justify-center align-center`}>
+                    <img className={styles.companyLogo} src={addLogoUrl} alt="" />
                 </div>
                 {/*         detail container  */}
                 <div className="flex dir-col">
@@ -23,8 +24,8 @@ const JobCard = ({addLogoUrl, jobPosition, monthlySalary, jobType, jobNature, jo
                 </div>
                 {/*         location         */}
                 <div className="flex dir-row">
-                    <div>
-                        <img src={addLogoUrl} alt={addLogoUrl} />
+                    <div className={styles.countryFlagContainer}>
+                        <img className={styles.countryFlag} src={flagIcon} alt={addLogoUrl} />
                     </div>
                     <p>{jobLocation}</p>
                 </div>

@@ -27,6 +27,9 @@
 .justify-center {
   justify-content: center;
 }
+.justify-space-btwn {
+  justify-content: space-between;
+}
 .align-center {
   align-items: center;
 }
@@ -75,8 +78,14 @@
   color: #FFFFFF;
 }
 /*      font size    */
+.text-14 {
+  font-size: 14px;
+}
 .text-16 {
   font-size: 16px;
+}
+.text-18 {
+  font-size: 18px;
 }
 .text-19 {
   font-size: 19px;
@@ -105,6 +114,19 @@
 }
 .m-t-15 {
   margin-top: 15px;
+}
+.m-tb-5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+} 
+.m-b-5 {
+  margin-bottom: 5px;
+}
+.m-b-10 {
+  margin-bottom: 10px;
+}
+.m-b-20 {
+  margin-bottom: 20px;
 }
 .m-r-5 {
   margin-right: 5px;
