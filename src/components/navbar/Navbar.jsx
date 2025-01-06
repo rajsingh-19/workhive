@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from "./navbar.module.css";
-import leftShape from "../../assets/leftShape.svg";
+// import leftShape from "../../assets/leftShape.svg";
 import rightShape from "../../assets/rightShape.svg";
 import middleShape from "../../assets/middleShape.svg";
 
@@ -33,7 +33,7 @@ const Navbar = () => {
   
   return (
     <div className={`${styles.navbarContainer} position-relative flex dir-row justify-center`}>
-        <img className={`${styles.leftShape} position-absolute`} src={leftShape} alt="left shape bg" />
+        {/* <img className={`${styles.leftShape} position-absolute`} src={leftShape} alt="left shape bg" /> */}
         <img className={`${styles.middleShape} position-absolute`} src={middleShape} alt="middle shape bg" />
         <img className={`${styles.rightShape} position-absolute`} src={rightShape} alt="right shape bg" />
         <div className={`${styles.navContent} flex dir-row align-center position-absolute`}>
