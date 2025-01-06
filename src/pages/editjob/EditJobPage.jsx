@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "../addjob/addjob.module.css";
 import { editJob, getJobById } from "../../services/index";
-import addJobPng from "../../assets/addjob.png";
+import addJobPng from "../../assets/addJob.png";
 import { toast } from 'react-toastify';
 
 const EditJobPage = () => {
