@@ -129,6 +129,8 @@ const MainPage = () => {
     //    Function to clear the rendered chosen skills
     const handleClearSkills = () => {
         setSelectedSkills([]);
+        setSkillsSearch('');
+        fetchJobs({ limit, offset, nameSearch, skillsSearch: '' });
     };
 
     return (
