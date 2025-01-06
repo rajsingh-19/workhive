@@ -7,7 +7,10 @@ import { jobList, deleteJob } from "../../services/index";
 import searchIcon from "../../assets/searchIcon.svg";
 import downArrow from "../../assets/downArrow.svg";
 
+
+//          --Debouncing Implementation--
 const debounceDelayTime = 1000;              // defining the wait time
+
 //                      Debounce function to delay execution of a function until a specified time has passed    
 const debouncing = (fn, waitTIme) => {
     let timerID;        // Stores the timer ID for the debounce, ensuring only the latest call gets executed after the wait time
@@ -32,6 +35,7 @@ const MainPage = () => {
     const [skillsSearch, setSkillsSearch] = useState('');
     const [userStatus, setUserStatus] = useState(false);
     const [skillsOpen, setSkillsOpen] = useState(false);
+    const [selectedSkills, setSelectedSkills] = useState([]); // Selected skills
 
     const navigate = useNavigate();
 
@@ -53,7 +57,7 @@ const MainPage = () => {
                 setJobs(data.jobs);
                 setCount(data.count);
             } else {
-                console.log(res);
+                console.log(res.status);
             }
         }, debounceDelayTime),          // Use debounce delay time
     []);                                // Dependencies for useCallback
@@ -97,13 +101,35 @@ const MainPage = () => {
         }
     };
 
+    //    Function to toggle skills and skills options container
     const handleskillsOptions = () => {
         setSkillsOpen((prev) => !prev);
     };
 
-    const handleCrossBtn = () => {
-        console.log("k");
-    }
+    const skillsArray= ["All", "React", "JavaScript", "Node", "Express"]; // Skills options
+
+    //    Function to add the skills into the selected skills array 
+    const handleSkillClick = (skill) => {
+        if (!selectedSkills.includes(skill)) {
+            setSelectedSkills((prev) => [...prev, skill]);
+        }
+    };
+
+    //    Function to remove the specific chosen skill
+    const handleRemoveSkill = (skill) => {
+        setSelectedSkills((prev) => prev.filter((s) => s !== skill));
+    };
+
+    //    Function to apply filters according to the chosen skills
+    const handleApplyFilter = () => {
+        setSkillsSearch(selectedSkills.join(","));
+        fetchJobs({ limit, offset, nameSearch, skillsSearch: selectedSkills.join(",") });
+    };
+
+    //    Function to clear the rendered chosen skills
+    const handleClearSkills = () => {
+        setSelectedSkills([]);
+    };
 
     return (
         <div className="flex dir-col align-center">
@@ -118,7 +144,7 @@ const MainPage = () => {
                 {/*         skills & add job container */}
                 <div className={`${styles.filterSkillsSection} flex dir-row`}>
                     {/*         right section     */}
-                    <div className={`${styles.skillsBtnCotainer} flex dir-col`}>
+                    <div className={`${styles.skillsBtnContainer} flex dir-col`}>
                         {
                             skillsOpen ? (
                                 <div className={`${styles.allSkillsContainer} flex dir-col`}>
@@ -126,11 +152,11 @@ const MainPage = () => {
                                         <span className="roboto font-wt-500">Skills</span>
                                         <img src={downArrow} alt="downArrow Icon" />
                                     </button>
-                                    <button className="roboto font-wt-500 cursor-pointer border-none outline-none bg-transparent">All</button>
-                                    <button className="roboto font-wt-500 cursor-pointer border-none outline-none bg-transparent">React</button>
-                                    <button className="roboto font-wt-500 cursor-pointer border-none outline-none bg-transparent">JavaScript</button>
-                                    <button className="roboto font-wt-500 cursor-pointer border-none outline-none bg-transparent">Node</button>
-                                    <button className="roboto font-wt-500 cursor-pointer border-none outline-none bg-transparent">Express</button>
+                                    {skillsArray.map((skill) => (
+                                        <button key={skill} onClick={() => handleSkillClick(skill)} className="roboto font-wt-500 cursor-pointer border-none outline-none bg-transparent" >
+                                            {skill}
+                                        </button>
+                                    ))}
                                 </div>
                             ) : (
                                 <button onClick={handleskillsOptions} className={`${styles.skillsBox} flex align-center position-absolute cursor-pointer border-none outline-none`}>
@@ -140,21 +166,32 @@ const MainPage = () => {
                             )
                         }
                     </div>
-                    <div className={styles.choosedSkillsContainer}>
-                        <ul>
-                            <li className={`${styles.choosedSkill} flex dir-row align-center`}>
-                                <p className="dm-sans font-wt-500">JavaScript</p>
-                                <button onClick={handleCrossBtn} className={`${styles.crossBtn} text-white outline-none border-none cursor-pointer`}>X</button>
-                            </li>
+                    {/*                 rendered choosen skills      */}
+                    <div className={styles.chosenSkillsContainer}>
+                        <ul className="flex dir-row">
+                            {selectedSkills.map((skill) => (
+                                <li key={skill} className={`${styles.chosenSkill} flex dir-row align-center`}>
+                                    <p className="dm-sans font-wt-500">{skill}</p>
+                                    <button onClick={() => handleRemoveSkill(skill)} className={`${styles.crossBtn} text-white outline-none border-none cursor-pointer`} >X</button>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                     {/*         left section     */}
                     <div>
                         {userStatus ? 
-                            (<button onClick={handleAddJob} className={`${styles.addJob} roboto font-wt-500 border-none outline-none cursor-pointer`}>+ Add Job</button>) : 
+                            (<div className="flex dir-col">
+                                <div className="flex dir-row">
+                                    <button onClick={handleApplyFilter} className={`${styles.applyFilter} text-14 text-white dm-sans font-wt-500 border-none outline-none cursor-pointer`}>Apply Filter</button>
+                                    <button onClick={handleAddJob} className={`${styles.addJob} text-14 roboto font-wt-500 border-none outline-none cursor-pointer`}>+ Add Job</button>
+                                </div>
+                                <div className="flex row-rev m-t-15">
+                                    <button onClick={handleClearSkills} className={`${styles.clear} text-16 dm-sans font-wt-500 bg-transparent outline-none border-none cursor-pointer`}>Clear</button>
+                                </div>
+                            </div>) : 
                             (<>
-                                <button className={`${styles.applyFilter} text-white dm-sans font-wt-500 border-none outline-none cursor-pointer`}>Apply Filter</button>
-                                <button className={`${styles.clear} dm-sans font-wt-500 bg-transparent outline-none border-none cursor-pointer`}>Clear</button>
+                                <button onClick={handleApplyFilter} className={`${styles.applyFilter} text-14 text-white dm-sans font-wt-500 border-none outline-none cursor-pointer`}>Apply Filter</button>
+                                <button onClick={handleClearSkills} className={`${styles.clear} text-16 dm-sans font-wt-500 bg-transparent outline-none border-none cursor-pointer`}>Clear</button>
                             </>)
                         }
                     </div>

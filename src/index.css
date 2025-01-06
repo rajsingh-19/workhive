@@ -30,6 +30,9 @@
 .justify-space-btwn {
   justify-content: space-between;
 }
+.row-rev {
+  flex-direction: row-reverse;
+}
 .align-center {
   align-items: center;
 }
