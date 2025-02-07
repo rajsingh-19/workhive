@@ -11,7 +11,7 @@ const ViewDetailPage = () => {
     const navigate = useNavigate();                 // Initialize `navigate` for programmatic navigation
     const [job, setJob] = useState(null);           // State to store the job details
     const [loading, setLoading] = useState(true);   // State to handle the loading status
-    const [userStatus, setUserStatus] = useState(false);
+    const [userStatus, setUserStatus] = useState(false);        //state to handle the user status
     
     useEffect(() => {
         const isUserLoggedIn = localStorage.getItem('token');
